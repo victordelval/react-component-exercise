@@ -1,14 +1,15 @@
 
 ## Table of Contents
 
-- [Short Description](#short-description)
+- [Summary](#summary)
 - [Project Dependencies](#project-dependencies)
 - [Project Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
+- [Description of the exercise](#description-of-the-exercise)
 
 
-## Short Description
-The objective of the project is to create a dropdown component with React.
+## Summary
+The goal of this project is to create a dropdown component with React, using best practices. This dropdown is also searchable and multi selection.
 
 
 
@@ -35,8 +36,15 @@ Production dependencies:
 
 ### Testing the components
 
-* **Jest**, a test runner built and maintained by Facebook.
-* **Enzyme**, is a suite of test utilities for testing React that makes it incredibly easy to render, search and make assertions on your components
+* **Jest**, a test runner built and maintained by Facebook (Delightful JavaScript Testing)
+
+  * Easy Setup: Complete and easy to set-up JavaScript testing solution. Works out of the box for any React project.
+
+  * Instant Feedback: Fast interactive watch mode runs only test files related to changed files and is optimized to give signal quickly.
+
+  * Snapshot Testing: Capture snapshots of React trees or other serializable values to simplify testing and to analyze how state changes over time.
+
+* **Enzyme**, by Airbnb, is a JavaScript Testing utility for React that makes it easier to assert, manipulate, and traverse your React Components' output. Enzyme's API is meant to be intuitive and flexible by mimicking jQuery's API for DOM manipulation and traversal.
 
 
 ## Project Structure
@@ -78,3 +86,155 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 The app is ready to be deployed!
+
+
+## Description of the exercise
+
+1. Break The UI Into A Component Hierarchy. Identify the components that make up the dropdown component.
+
+    * MultiSearchDropdown
+      * DropdownList
+        * ListItem
+      * DropdownBox
+        * SearchBox
+        * LabelList
+          * LabelButton
+
+
+2. Build a static version in React.
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+
+
+class LabelButton extends React.Component {
+    render() {
+        const name = this.props.item.name;
+        const code = this.props.item.code;
+        return (
+            <label className="button"
+                data-code={code}>
+                {name}
+            </label>
+        );
+    }
+}
+
+class LabelList extends React.Component {
+    render() {
+        const collection = [];
+        this.props.items.forEach((item) => {
+            collection.push(
+                <LabelButton
+                    item={item}
+                    key={item.code} />
+            );
+        });
+        return (
+            <span>
+                {collection}
+            </span>
+        );
+    }
+}
+
+class SearchBox extends React.Component {
+    render() {
+        return (
+            <form>
+                <input type="text" placeholder="Search..." />
+            </form>
+        );
+    }
+}
+
+class DropdownBox extends React.Component {
+    render() {
+        return (
+            <div>
+                <SearchBox />
+                <LabelList items={this.props.items} />
+            </div>
+        );
+    }
+}
+
+class ListItem extends React.Component {
+    render() {
+        const item = this.props.item;
+        return (
+            <li className="item">
+                {item.name}
+            </li>
+        );
+    }
+}
+
+class DropdownList extends React.Component {
+    render() {
+        const collection = [];
+        this.props.items.forEach((item) => {
+            collection.push(
+                <ListItem
+                    item={item}
+                    key={item.code} />
+            );
+        });
+        return (
+            <span>
+                {collection}
+            </span>
+        );
+    }
+}
+
+class MultiSearchDropdown extends React.Component {
+    render() {
+        return (
+            <div>
+                <DropdownBox items={this.props.data} />
+                <DropdownList items={this.props.data} />
+            </div>
+        );
+    }
+}
+
+
+const COUNTRIES = [
+    { name: 'Spain', code: 'SP' },
+    { name: 'Portugal', code: 'PT' },
+    { name: 'France', code: 'FR' },
+    { name: 'Italy', code: 'IT' },
+    { name: 'Germany', code: 'DE' },
+    { name: 'Netherlands', code: 'NL' }
+];
+
+ReactDOM.render(
+    <MultiSearchDropdown data={COUNTRIES} />,
+    document.getElementById('root')
+);
+
+```
+
+3. Identify the minimal (but complete) representation of UI state
+
+Simply ask three questions about each piece of data:
+
+* Is it passed in from a parent via props? If so, it probably isn’t state.
+
+* Does it remain unchanged over time? If so, it probably isn’t state.
+
+* Can you compute it based on any other state or props in your component? If so, it isn’t state.
+
+The state is (since they change over time and can’t be computed from anything)
+
+* The search text the user has entered
+
+* The selected items the user has selected
+
+The original list of items is passed in as props, so that’s not state. The filtered list of items isn’t state because it can be computed by combining the original list of items with the search text.
+
+4. Identify where your state should live
+

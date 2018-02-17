@@ -19,7 +19,6 @@ class LabelButton extends React.Component {
 class LabelList extends React.Component {
     render() {
         const collection = [];
-
         this.props.items.forEach((item) => {
             collection.push(
                 <LabelButton
@@ -27,7 +26,6 @@ class LabelList extends React.Component {
                     key={item.code} />
             );
         });
-
         return (
             <span>
                 {collection}
@@ -71,7 +69,6 @@ class ListItem extends React.Component {
 class DropdownList extends React.Component {
     render() {
         const collection = [];
-
         this.props.items.forEach((item) => {
             collection.push(
                 <ListItem
@@ -79,7 +76,6 @@ class DropdownList extends React.Component {
                     key={item.code} />
             );
         });
-
         return (
             <span>
                 {collection}
@@ -90,10 +86,11 @@ class DropdownList extends React.Component {
 
 class MultiSearchDropdown extends React.Component {
     render() {
+        const data = this.props.data;
         return (
             <div>
-                <DropdownBox items={this.props.data} />
-                <DropdownList items={this.props.data} />
+                <DropdownBox items={data} />
+                <DropdownList items={data} />
             </div>
         );
     }
