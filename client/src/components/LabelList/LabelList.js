@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import LabelButton from '../LabelButton';
 
 
 class LabelList extends React.Component {
+
+    static propTypes = {
+        selected: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }
+
     render() {
         const collection = [];
 

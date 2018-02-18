@@ -30,9 +30,19 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <MultiSearchDropdown data={this.state.response} />
-      </div>
+      <main className="countries-container">
+          <h1 className="countries-container-text">Dropdown components</h1>
+          <hr/>
+          <p className="countries-container-text countries-container-p">This is a "Multiple Search Selection" Dropdown component:</p>
+          <div className="row">
+              <div className="four columns">&nbsp;</div>
+              <div className="four columns">
+              <MultiSearchDropdown
+                data={this.state.response} />
+              </div>
+              <div className="four columns"></div>
+          </div>
+      </main>
     );
   }
 

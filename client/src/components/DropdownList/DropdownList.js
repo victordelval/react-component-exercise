@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ListItem from '../ListItem';
 
 
 class DropdownList extends React.Component {
+
+    static propTypes = {
+        items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    }
+
     render() {
         const collection = [];
 
@@ -16,7 +22,7 @@ class DropdownList extends React.Component {
         });
 
         return (
-            <span>
+            <span className={ this.props.dropdownCss }>
                 {collection}
             </span>
         );

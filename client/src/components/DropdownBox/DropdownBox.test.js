@@ -7,7 +7,8 @@ import DropdownBox from './DropdownBox';
 describe('<DropdownBox />', () => {
 
     it('Should render without crashing', () => {
-        const wrapper = shallow(<DropdownBox />);
+        const wrapper = shallow(<DropdownBox
+            selected={ [] } />);
     });
 
 });

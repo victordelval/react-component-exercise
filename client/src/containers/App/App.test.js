@@ -13,10 +13,9 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import App from './App';
-import MultiSearchDropdown from '../MultiSearchDropdown';
 
 
-describe('<MultiSearchDropdown />', () => {
+describe('<App />', () => {
 
     it('Should render without crashing', () => {
 
@@ -39,11 +38,6 @@ describe('<MultiSearchDropdown />', () => {
         window.fetch = jest.fn().mockImplementation(() =>
             Promise.resolve(mockResponse(200, null, JSON.stringify(mockedData))));
 
-
-        const wrapper = shallow(<App
-            data={ mockedData.countries } />);
-
-        expect(wrapper.find('MultiSearchDropdown').length).toBe(1);
+        const wrapper = shallow(<App />);
     });
-
 });
