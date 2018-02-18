@@ -1,10 +1,22 @@
+const fs = require('fs');
 const express = require('express');
 
 const app = express();
 const port = process.env.PORT || 9000;
 
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
+// custom settings
+app.disable('x-powered-by')
+app.set('env', 'development')  // process.env ...
+
+app.get('/api/data', (req, res) => {
+    // read file async
+    var content;
+    fs.readFile('./countries.json', 'utf8', function (err, data) {
+        if (err) throw err;
+        content = JSON.parse(data);
+        res.json({ data: content });
+    });
+
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
