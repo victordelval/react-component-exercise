@@ -10,11 +10,11 @@ app.set('env', 'development')  // process.env ...
 
 app.get('/api/data', (req, res) => {
     // read file async
-    var content;
+    let content;
     fs.readFile('./countries.json', 'utf8', function (err, data) {
         if (err) throw err;
         content = JSON.parse(data);
-        res.json({ data: content });
+        res.send({ data: content });
     });
 
 });

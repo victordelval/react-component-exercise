@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 
 import './App.css';
 
-import MultiSearchDropdown from './containers/MultiSearchDropdown';
+import MultiSearchDropdown from '../MultiSearchDropdown';
 
 
 class App extends Component {
