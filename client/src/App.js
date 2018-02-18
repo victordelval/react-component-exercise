@@ -6,21 +6,33 @@ import './App.css';
 import MultiSearchDropdown from './containers/MultiSearchDropdown';
 
 
-const COUNTRIES = [
-  { name: 'Spain', code: 'SP' },
-  { name: 'Portugal', code: 'PT' },
-  { name: 'France', code: 'FR' },
-  { name: 'Italy', code: 'IT' },
-  { name: 'Germany', code: 'DE' },
-  { name: 'Netherlands', code: 'NL' }
-];
-
-
 class App extends Component {
+
+  state = {
+    response: []
+  };
+
+  componentDidMount() {
+    this.callApi()
+      .then(res => {
+        this.setState({ response: res.data })
+      })
+      .catch(err => console.log(err));
+  }
+
+  callApi = async () => {
+    const response = await fetch('/api/data');
+    const body = await response.json();
+
+    if (response.status !== 200) throw Error(body.message);
+
+    return body;
+  };
+
   render() {
     return (
       <div>
-        <MultiSearchDropdown data={COUNTRIES} />
+        <MultiSearchDropdown data={this.state.response} />
       </div>
     );
   }
