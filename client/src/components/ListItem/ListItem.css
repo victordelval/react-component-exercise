@@ -1,0 +1,11 @@
+/*  */
+
+.dropdown-list > .item {
+    cursor: pointer;
+}
+
+.dropdown-list > .item-selected {
+    background-color: #ececec;
+    color: #808080;
+    cursor: not-allowed;
+}

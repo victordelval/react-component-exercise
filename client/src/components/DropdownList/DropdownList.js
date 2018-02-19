@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './DropdownList.css'
 import ListItem from '../ListItem';
 
 
@@ -22,9 +23,9 @@ class DropdownList extends React.Component {
         });
 
         return (
-            <span className={ this.props.dropdownCss }>
+            <ul className={`dropdown-list ${this.props.dropdownCss}`}>
                 {collection}
-            </span>
+            </ul>
         );
     }
 }

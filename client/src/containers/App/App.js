@@ -30,10 +30,9 @@ class App extends Component {
 
   render() {
     return (
-      <main className="countries-container">
-          <h1 className="countries-container-text">Dropdown components</h1>
-          <hr/>
-          <p className="countries-container-text countries-container-p">This is a "Multiple Search Selection" Dropdown component:</p>
+      <main className="App">
+          <h1 className="App-header">Dropdown component ;P</h1>
+          <p className="App-title">Searchable and Multiple Selection Dropdown</p>
           <div className="row">
               <div className="four columns">&nbsp;</div>
               <div className="four columns">
