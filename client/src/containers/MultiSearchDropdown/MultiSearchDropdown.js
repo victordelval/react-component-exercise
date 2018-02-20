@@ -15,6 +15,9 @@ class MultiSearchDropdown extends React.Component {
     constructor(props) {
         super(props);
 
+        // events bindings
+        this.onClickBox = this.onClickBox.bind(this);
+
         // state (properties that change over time)
         this.state = {
             loading: false,
@@ -24,6 +27,18 @@ class MultiSearchDropdown extends React.Component {
         };
     }
 
+    onClickBox(e) {
+        // exit if click over label button (selected items)
+        if (e.target.nodeName === 'LABEL') return;
+
+        // expand dropdown
+        if (!this.state.expanded) {
+            if (e.target.nodeName === 'INPUT') e.target.focus();
+            else e.target.getElementsByTagName('input')[0].focus();
+            this.setState({ expanded: true });
+        }
+    }
+
     render() {
         const selectClassName = 'multi-search-dropdown';
         return (
@@ -31,7 +46,8 @@ class MultiSearchDropdown extends React.Component {
                 <DropdownBox
                     search={ this.state.search }
                     selected={ this.state.selected }
-                    dropdownCss={ selectClassName } />
+                    dropdownCss={ selectClassName }
+                    onClick={ this.onClickBox } />
 
                 <DropdownList
                     items={ this.props.data }
