@@ -8,8 +8,14 @@ import DropdownList from './DropdownList';
 describe('<DropdownList />', () => {
 
     it('Should render without crashing', () => {
-        const wrapper = shallow(<DropdownList
-            items={ [] } />);
+        const wrapper = shallow(
+            <DropdownList
+                items={ [] }
+                loading={ false }
+                expanded={ false }
+                search={ '' }
+                selected={ [] } />
+        );
     });
 
 });
