@@ -1,14 +1,3 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-
-// it('renders without crashing', () => {
-//   const div = document.createElement('div');
-//   ReactDOM.render(<App />, div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
-
-
 import React from 'react';
 import { shallow } from 'enzyme';
 
@@ -17,27 +6,32 @@ import App from './App';
 
 describe('<App />', () => {
 
-    it('Should render without crashing', () => {
+    describe('componentDidMount', () => {
+        it('sets the state componentDidMount', async () => {
+            window.fetch = jest.fn().mockImplementation(() => ({
+                status: 200,
+                json: () => new Promise((resolve, reject) => {
+                    resolve({
+                        data: [
+                            { code: "ES", name: "Spain" }, { code: "PT", name: "Portugal" }
+                        ]
+                    })
+                })
+            }))
 
-        // mock global fetch
-        const mockResponse = (status, statusText, response) => {
-            return new window.Response(response, {
-                status: status,
-                statusText: statusText,
-                headers: { 'Content-type': 'application/json' }
-            });
-        };
+            const renderedComponent = await shallow(<App />)
+            await renderedComponent.update()
+            expect(renderedComponent.state('response').length).toEqual(2)
+        })
 
-        const mockedData = {
-            countries: [
-                { code: "ES", name: "Spain" },
-                { code: "PT", name: "Portugal" }
-            ]
-        };
+        it('sets the state componentDidMount on error', async () => {
+            window.fetch = jest.fn().mockImplementation(() => ({
+                status: 500,
+            }))
 
-        window.fetch = jest.fn().mockImplementation(() =>
-            Promise.resolve(mockResponse(200, null, JSON.stringify(mockedData))));
-
-        const wrapper = shallow(<App />);
-    });
+            const renderedComponent = await shallow(<App />)
+            await renderedComponent.update()
+            expect(renderedComponent.state('errorStatus')).toEqual('Error fetching countries')
+        })
+    })
 });

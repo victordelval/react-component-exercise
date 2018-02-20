@@ -5,28 +5,52 @@ import './App.css';
 import MultiSearchDropdown from '../MultiSearchDropdown';
 
 
-class App extends Component {
+// class App extends Component {
 
-  state = {
-    response: []
-  };
+//   state = {
+//     response: []
+//   };
 
-  componentDidMount() {
-    this.callApi()
-      .then(res => {
-        this.setState({ response: res.data })
-      })
-      .catch(err => console.log(err));
+
+class App extends React.Component {
+
+  constructor(props) {
+      super(props);
+
+      // state (properties that change over time)
+      this.state = {
+          response: [],
+          errorStatus: ''
+      };
   }
 
-  callApi = async () => {
-    const response = await fetch('/api/data');
-    const body = await response.json();
+  // componentDidMount() {
+  //   this.callApi()
+  //     .then(res => {
+  //       this.setState({ response: res.data })
+  //     })
+  //     .catch(err => console.log(err));
+  // }
 
-    if (response.status !== 200) throw Error(body.message);
+  // callApi = async () => {
+  //   const response = await fetch('/api/data');
+  //   const body = await response.json();
 
-    return body;
-  };
+  //   if (response.status !== 200) throw Error(body.message);
+
+  //   return body;
+  // };
+
+  async componentDidMount() {
+    const response = await fetch('/api/data')
+    if (response.status >= 400) {
+      this.setState({errorStatus: 'Error fetching countries'});
+    } else {
+      response.json().then(res => {
+        this.setState({response: res.data})
+      });
+    }
+  }
 
   render() {
     return (
