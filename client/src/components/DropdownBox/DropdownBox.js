@@ -9,6 +9,7 @@ class DropdownBox extends React.Component {
 
     static propTypes = {
         selected: PropTypes.arrayOf(PropTypes.object).isRequired,
+        search: PropTypes.string,
         dropdownCss: PropTypes.string
     }
 

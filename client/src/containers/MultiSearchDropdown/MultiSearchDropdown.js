@@ -12,17 +12,33 @@ class MultiSearchDropdown extends React.Component {
         data: PropTypes.arrayOf(PropTypes.object).isRequired,
     }
 
-    render() {
-        const data = this.props.data;
-        const selectClassName = 'multi-search-dropdown';
+    constructor(props) {
+        super(props);
 
+        // state (properties that change over time)
+        this.state = {
+            loading: false,
+            expanded: false,
+            search: '',
+            selected: []
+        };
+    }
+
+    render() {
+        const selectClassName = 'multi-search-dropdown';
         return (
             <div>
                 <DropdownBox
-                    selected={ [] }
+                    search={ this.state.search }
+                    selected={ this.state.selected }
                     dropdownCss={ selectClassName } />
+
                 <DropdownList
-                    items={data}
+                    items={ this.props.data }
+                    loading={ this.state.loading }
+                    expanded={ this.state.expanded }
+                    search={ this.state.search }
+                    selected={ this.state.selected }
                     dropdownCss={ selectClassName } />
             </div>
         );

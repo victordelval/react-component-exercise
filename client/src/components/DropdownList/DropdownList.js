@@ -9,11 +9,16 @@ class DropdownList extends React.Component {
 
     static propTypes = {
         items: PropTypes.arrayOf(PropTypes.object).isRequired,
+        selected: PropTypes.arrayOf(PropTypes.object).isRequired,
+        expanded: PropTypes.bool.isRequired,
+        search: PropTypes.string,
+        dropdownCss: PropTypes.string
     }
 
     render() {
-        const collection = [];
+        if (!this.props.expanded) return null;
 
+        const collection = [];
         this.props.items.forEach((item) => {
             collection.push(
                 <ListItem
