@@ -14,7 +14,7 @@ class MultiSearchDropdown extends React.Component {
 
     render() {
         const data = this.props.data;
-        const selectClassName = 'countries-dropdown multi-search-dropdown';
+        const selectClassName = 'multi-search-dropdown';
 
         return (
             <div>
