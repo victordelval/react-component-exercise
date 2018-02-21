@@ -5,13 +5,6 @@ import './App.css';
 import MultiSearchDropdown from '../MultiSearchDropdown';
 
 
-// class App extends Component {
-
-//   state = {
-//     response: []
-//   };
-
-
 class App extends React.Component {
 
   constructor(props) {
@@ -23,23 +16,6 @@ class App extends React.Component {
           errorStatus: ''
       };
   }
-
-  // componentDidMount() {
-  //   this.callApi()
-  //     .then(res => {
-  //       this.setState({ response: res.data })
-  //     })
-  //     .catch(err => console.log(err));
-  // }
-
-  // callApi = async () => {
-  //   const response = await fetch('/api/data');
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) throw Error(body.message);
-
-  //   return body;
-  // };
 
   async componentDidMount() {
     const response = await fetch('/api/data')

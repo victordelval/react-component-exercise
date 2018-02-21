@@ -8,15 +8,19 @@ import LabelList from '../LabelList';
 class DropdownBox extends React.Component {
 
     static propTypes = {
-        onClick: PropTypes.func.isRequired,
+        onClickBox: PropTypes.func.isRequired,
         selected: PropTypes.arrayOf(PropTypes.object).isRequired,
         search: PropTypes.string,
         dropdownCss: PropTypes.string
     }
 
+    handleClickBox = (e) => {
+        this.props.onClickBox(e.target)
+    }
+
     render() {
         return (
-            <div onClick={ this.props.onClick }
+            <div onClick={ this.handleClickBox }
                  className={ this.props.dropdownCss }>
                 <SearchBox />
                 <LabelList selected={this.props.selected || []} />

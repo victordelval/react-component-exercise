@@ -5,8 +5,8 @@
 - [Project Dependencies](#project-dependencies)
 - [Project Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
-- [Description of the exercise](#description-of-the-exercise)
-
+- [Description of the Exercise](#description-of-the-exercise)
+- [Internet Resources](#internet-resources)
 
 ## Summary
 The goal of this project is to create a dropdown component with React, using best practices. This dropdown is also searchable and multi selection.
@@ -88,7 +88,7 @@ The build is minified and the filenames include the hashes.<br>
 The app is ready to be deployed!
 
 
-## Description of the exercise
+## Description of the Exercise
 
 1. Break The UI Into A Component Hierarchy. Identify the components that make up the dropdown component.
 
@@ -238,3 +238,10 @@ The original list of items is passed in as props, so that’s not state. The fil
 
 4. Identify where your state should live
 
+## Internet Resources
+
+Basic:
+* https://reactjs.org/docs/thinking-in-react.html
+
+Testing:
+* https://medium.com/@wvm/asynchronous-api-testing-in-react-cf3b180bc3d
